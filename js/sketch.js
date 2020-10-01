@@ -30,6 +30,11 @@ function draw() {
   if (posY < size / 2 || posY > windowHeight - size) {
 		changeY *= -1;
   }
+  // change the direction when hitting the paddle
+  if (posX > paddleX && posX < paddleX + paddleWidth && posY + size / 2 >= paddleY) {
+		changeX *= -1;
+		changeY *= -1;
+  }
 
   // check if the game is started or not
   if (!started) {
@@ -42,4 +47,12 @@ function draw() {
   fill(0, 255, 255);
   noStroke();
   rect(paddleX, paddleY, paddleWidth, paddleHeight);
+}
+
+function keyPressed() {
+	if (keyCode === LEFT_ARROW) {
+		paddleX -= 50;
+	} else if (keyCode === RIGHT_ARROW) {
+		paddleX += 50;
+	}
 }
