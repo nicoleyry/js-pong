@@ -8,6 +8,7 @@ var paddleY;
 var paddleWidth = 100;
 var paddleHeight = 25;
 var started = false;
+var score = 0;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -33,7 +34,8 @@ function draw() {
   // change the direction when hitting the paddle
   if (posX > paddleX && posX < paddleX + paddleWidth && posY + size / 2 >= paddleY) {
 		changeX *= -1;
-		changeY *= -1;
+    changeY *= -1;
+    score ++;
   }
 
   // check if the game is started or not
@@ -47,6 +49,11 @@ function draw() {
   fill(0, 255, 255);
   noStroke();
   rect(paddleX, paddleY, paddleWidth, paddleHeight);
+
+  // display the score
+  fill(0, 255, 255);
+  textSize(24);
+  text("Score: " + score, 10, 25);
 }
 
 function keyPressed() {
