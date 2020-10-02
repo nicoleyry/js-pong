@@ -17,7 +17,7 @@ function setup() {
 
 	// check if the game is started or not
 	if (!started) {
-		paddleX = windowWidth / 2;
+		paddleX = windowWidth / 2-50;
 		paddleY = windowHeight - 100;
 		started = true;
 	}
