@@ -1,8 +1,8 @@
 var posX = Math.floor(Math.random() * 300) + 50;
 var posY = Math.floor(Math.random() * 200) + 50;
 var size = 50;
-var changeX;
-var changeY;
+var changeX = 0;
+var changeY = 0;
 var paddleX;
 var paddleY;
 var paddleWidth = 100;
@@ -10,11 +10,10 @@ var paddleHeight = 25;
 var started = false;
 var score = 0;
 var btn;
+var startBtn;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  changeX = random(4, 6);
-  changeY = random(4, 6);
 
 	// check if the game is started or not
 	if (!started) {
@@ -26,6 +25,18 @@ function setup() {
 
 function draw() {
   background(0);
+
+  // display the title
+  startBtn = createElement("button", "JS Pong Game (click anywhere to start)");
+  startBtn.position(windowWidth / 2 - 500, 100);
+  startBtn.size(1000, 30);
+  startBtn.style("background-color", "transparent");
+  startBtn.style("border", "none");
+  startBtn.style("color", "white");
+  startBtn.style("text-align", "center");
+  startBtn.style("font-family", "Helvetica");
+  startBtn.style("font-size", "40px");
+
   // draw the ball
   fill(240, 138, 93);
   noStroke();
@@ -99,7 +110,6 @@ function gameover() {
 	text("Score: " + score, windowWidth / 2, windowHeight / 2);
 
 	// display the replay btn
-	textSize(20);
 	btn = createElement("button", "Replay ⟲");
 	btn.position(windowWidth / 2 - 50, windowHeight / 2 + 30);
 	btn.size(100, 30);
@@ -121,4 +131,9 @@ function replay() {
   paddleX = windowWidth / 2;
   paddleY = windowHeight - 100;
   removeElements();
+}
+
+function mouseClicked() {
+  changeX = random(4, 6);
+  changeY = random(4, 6);
 }
