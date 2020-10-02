@@ -77,6 +77,7 @@ function draw() {
       posY = 50;
       changeX = 5;
       changeY = 5;
+      score = 0; // reset the score
       paddleX = windowWidth / 2;
       paddleY = windowHeight - 100;
       removeElements();
