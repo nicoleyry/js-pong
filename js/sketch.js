@@ -1,8 +1,8 @@
 var posX = Math.floor(Math.random() * 300) + 50;
-var posY = 50;
+var posY = Math.floor(Math.random() * 200) + 50;
 var size = 50;
-var changeX = 5;
-var changeY = 5;
+var changeX;
+var changeY;
 var paddleX;
 var paddleY;
 var paddleWidth = 100;
@@ -12,7 +12,9 @@ var score = 0;
 var btn;
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth, windowHeight);
+  changeX = random(4, 6);
+  changeY = random(4, 6);
 
 	// check if the game is started or not
 	if (!started) {
@@ -45,43 +47,7 @@ function draw() {
     changeY *= -1;
     score ++;
   } else if (posY + size / 2 >= paddleY + paddleHeight) {
-    // if didn't catch the ball
-    // stop the ball
-		changeX = 0;
-    changeY = 0;
-    // set the game start to false
-    started = false;
-
-    // game over hint
-		fill(255, 65, 77);
-    textSize(50);
-    textStyle(BOLD);
-    textAlign(CENTER);
-		text("GAME OVER 💀", windowWidth / 2, windowHeight/2-50);
-    textSize(30);
-    text("Score: " + score, windowWidth / 2, windowHeight / 2);
-    
-    // display the replay btn
-    textSize(20);
-    btn = createElement("button", "Replay ⟲");
-    btn.position(windowWidth / 2 - 50, windowHeight / 2 + 30);
-    btn.size(100, 30);
-    btn.style("background-color", "transparent");
-    btn.style("border", "none");
-    btn.style("color", "white");
-    btn.style("font-family", "Helvetica");
-    btn.style("font-size", "20px");
-    btn.mousePressed(function () {
-      started = true;
-		  posX = Math.floor(Math.random() * 300) + 50;
-      posY = 50;
-      changeX = 5;
-      changeY = 5;
-      score = 0; // reset the score
-      paddleX = windowWidth / 2;
-      paddleY = windowHeight - 100;
-      removeElements();
-    });
+    gameover();
   }
 
   // draw the paddle
@@ -96,6 +62,7 @@ function draw() {
   textAlign(LEFT);
   text("Score: " + score, 10, 25);
 
+  // display the hint
   fill(255);
   textSize(16);
   textStyle(ITALIC);
@@ -112,4 +79,46 @@ function keyPressed() {
       paddleX += 50;
     }
   }	
+}
+
+function gameover() {
+	// if didn't catch the ball
+	// stop the ball
+	changeX = 0;
+	changeY = 0;
+	// set the game start to false
+	started = false;
+
+	// game over hint
+	fill(255, 65, 77);
+	textSize(50);
+	textStyle(BOLD);
+	textAlign(CENTER);
+	text("GAME OVER 💀", windowWidth / 2, windowHeight / 2 - 50);
+	textSize(30);
+	text("Score: " + score, windowWidth / 2, windowHeight / 2);
+
+	// display the replay btn
+	textSize(20);
+	btn = createElement("button", "Replay ⟲");
+	btn.position(windowWidth / 2 - 50, windowHeight / 2 + 30);
+	btn.size(100, 30);
+	btn.style("background-color", "transparent");
+	btn.style("border", "none");
+	btn.style("color", "white");
+	btn.style("font-family", "Helvetica");
+	btn.style("font-size", "20px");
+	btn.mousePressed(replay);
+}
+
+function replay() {
+  started = true;
+  posX = Math.floor(Math.random() * 300) + 50;
+  posY = 50;
+  changeX = 5;
+  changeY = 5;
+  score = 0; // reset the score
+  paddleX = windowWidth / 2;
+  paddleY = windowHeight - 100;
+  removeElements();
 }
