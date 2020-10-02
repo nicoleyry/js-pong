@@ -29,7 +29,7 @@ function draw() {
   // display the title
   startBtn = createElement("button", "JS Pong Game (click anywhere to start)");
   startBtn.position(windowWidth / 2 - 500, 100);
-  startBtn.size(1000, 30);
+  startBtn.size(1000, 50);
   startBtn.style("background-color", "transparent");
   startBtn.style("border", "none");
   startBtn.style("color", "white");
